@@ -7,7 +7,7 @@ function App() {
   const [eqValues, setEqValues] = useState({
     low: 64, // Valeur par défaut au centre (0-127)
     mid: 64, // Valeur par défaut au centre (0-127)
-    high: 64, // Valeur par défaut au centre (0-127)
+    master: 64, // Valeur par défaut au centre (0-127)
   });
 
   useEffect(() => {
@@ -32,6 +32,7 @@ function App() {
   };
 
   const handleRangeChange = (e) => {
+    // console.log(e);
     const { name, value } = e.target;
     setEqValues((prevValues) => ({
       ...prevValues,
@@ -39,13 +40,20 @@ function App() {
     }));
 
     if (midiOutput) {
-      const channel = 1; // Canal MIDI 1
-      const controlChangeNumber = 64; // Note 64
-      console.log(channel, controlChangeNumber);
+      // console.log(midiOutput);
+      const channel = 14; // Canal MIDI 1
+      const controlChangeNumber = 20; // Note 64
+
+      // midiOutput.send([0xb0, controlChangeNumber, parseInt(value)]);
+      console.log([0x19]);
       midiOutput.channels[channel].sendControlChange(
         controlChangeNumber,
         parseInt(value, 10)
       );
+      // midiOutput.channels[channel].sendControlChange(
+      //   controlChangeNumber,
+      //   parseInt(value)
+      // );
     }
   };
 
@@ -53,53 +61,21 @@ function App() {
     <div className="App">
       <h1>Contrôleur MIDI pour Ultracurve Pro DSP8024</h1>
       <div className="slider-container">
-        {/* <div className="slider">
-          <span className="value">
-            {convertToEqValue(eqValues.low).toFixed(1)}
-          </span>
-          <input
-            type="range"
-            name="low"
-            min="0"
-            max="127"
-            step="2"
-            value={eqValues.low}
-            onChange={handleRangeChange}
-            orient="vertical"
-          />
-          <label>Basses</label>
-        </div> */}
-        {/* <div className="slider">
-          <span className="value">
-            {convertToEqValue(eqValues.mid).toFixed(1)}
-          </span>
-          <input
-            type="range"
-            name="mid"
-            min="0"
-            max="127"
-            step="2"
-            value={eqValues.mid}
-            onChange={handleRangeChange}
-            orient="vertical"
-          />
-          <label>Médiums</label>
-        </div> */}
         <div className="slider">
           <span className="value">
-            {convertToEqValue(eqValues.high).toFixed(1)}
+            {convertToEqValue(eqValues.master).toFixed(1)}
           </span>
           <input
             type="range"
-            name="high"
+            name="master"
             min="0"
-            max="128"
+            max="127"
             step="2"
-            value={eqValues.high}
+            value={eqValues.master}
             onChange={handleRangeChange}
             orient="vertical"
           />
-          <label>Aigus</label>
+          <label>MASTER</label>
         </div>
       </div>
     </div>
