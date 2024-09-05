@@ -26,12 +26,15 @@ h1 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.slider input[type="range"] {
-  width: 8px;
+.slider input[type="range"]
+/* .form-range */ {
+  transform: rotate(90deg);
+
+  /* width: 8px; */
   height: 150px;
   margin: 20px 0;
   direction: rtl;
-  writing-mode: vertical-lr;
+  /* writing-mode: vertical-lr; */
 }
 
 .slider label {

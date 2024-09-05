@@ -7,7 +7,7 @@ function App() {
   const [eqValues, setEqValues] = useState({
     low: 64, // Valeur par défaut au centre (0-127)
     mid: 64, // Valeur par défaut au centre (0-127)
-    high: 64, // Valeur par défaut au centre (0-127)
+    master: 64, // Valeur par défaut au centre (0-127)
   });
 
   useEffect(() => {
@@ -28,23 +28,27 @@ function App() {
 
   // Fonction de conversion des valeurs
   const convertToEqValue = (value) => {
-    return (value / 128) * 32 - 16; // Convertir 0-127 en -15 à +15
+    return (value / 128) * 32 - 16; // Convertir 0-127 en -16 à +16
   };
 
   const handleRangeChange = (e) => {
+    console.log(0xbd);
     const { name, value } = e.target;
     setEqValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
-
     if (midiOutput) {
-      const channel = 1; // Canal MIDI 1
-      const controlChangeNumber = 64; // Note 64
-      console.log(channel, controlChangeNumber);
+      const channel = 14; // Canal MIDI 1
+      const controlChangeNumberL = 20; // Note 64
+      const controlChangeNumberR = 52; // Note 64
       midiOutput.channels[channel].sendControlChange(
-        controlChangeNumber,
-        parseInt(value, 10)
+        controlChangeNumberL,
+        parseInt(value)
+      );
+      midiOutput.channels[channel].sendControlChange(
+        controlChangeNumberR,
+        parseInt(value)
       );
     }
   };
@@ -87,19 +91,38 @@ function App() {
         </div> */}
         <div className="slider">
           <span className="value">
-            {convertToEqValue(eqValues.high).toFixed(1)}
+            {convertToEqValue(eqValues.master).toFixed(1)} dB
           </span>
-          <input
+          {/* <input
             type="range"
-            name="high"
+            name="master"
+            className="form-range"
+            id="customRange1"
             min="0"
             max="128"
             step="2"
-            value={eqValues.high}
+            value={eqValues.master}
             onChange={handleRangeChange}
             orient="vertical"
           />
-          <label>Aigus</label>
+          <label htmlFor="customRange1" className="form-label">
+            MASTER
+          </label> */}
+          <input
+            type="range"
+            name="master"
+            className="form-range"
+            min="0"
+            max="128"
+            step="2"
+            id="customRange1"
+            value={eqValues.master}
+            onChange={handleRangeChange}
+            orient="vertical"
+          />{" "}
+          <label htmlFor="customRange1" className="form-label">
+            MASTER
+          </label>
         </div>
       </div>
     </div>
