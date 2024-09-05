@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/eq-dsp-8024/static/css/main.2b65228c.css",
+    "main.js": "/eq-dsp-8024/static/js/main.37604fc7.js",
+    "static/js/488.725a6e6f.chunk.js": "/eq-dsp-8024/static/js/488.725a6e6f.chunk.js",
+    "index.html": "/eq-dsp-8024/index.html",
+    "main.2b65228c.css.map": "/eq-dsp-8024/static/css/main.2b65228c.css.map",
+    "main.37604fc7.js.map": "/eq-dsp-8024/static/js/main.37604fc7.js.map",
+    "488.725a6e6f.chunk.js.map": "/eq-dsp-8024/static/js/488.725a6e6f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b65228c.css",
+    "static/js/main.37604fc7.js"
+  ]
+}
