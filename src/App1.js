@@ -6,38 +6,38 @@ import AudioAnalyzer from "./components/AudioAnalyzer";
 function App() {
   const [midiOutput, setMidiOutput] = useState(null);
   const [eqValues, setEqValues] = useState({
-    tranche1: 30,
-    tranche2: 30,
-    tranche3: 30,
-    tranche4: 30,
-    tranche5: 30,
-    tranche6: 30,
-    tranche7: 30,
-    tranche8: 30,
-    tranche9: 30,
-    tranche10: 30,
-    tranche11: 30,
-    tranche12: 30,
-    tranche13: 30,
-    tranche14: 30,
-    tranche15: 30,
-    tranche16: 30,
-    tranche17: 30,
-    tranche18: 30,
-    tranche19: 30,
-    tranche20: 30,
-    tranche21: 30,
-    tranche22: 30,
-    tranche23: 30,
-    tranche24: 30,
-    tranche25: 30,
-    tranche26: 30,
-    tranche27: 30,
-    tranche28: 30,
-    tranche29: 30,
-    tranche30: 30,
-    tranche31: 30,
-    // Valeur par défaut au centre (0-127)
+    tranche1: 64,
+    tranche2: 64,
+    tranche3: 64,
+    tranche4: 64,
+    tranche5: 64,
+    tranche6: 64,
+    tranche7: 64,
+    tranche8: 64,
+    tranche9: 64,
+    tranche10: 64,
+    tranche11: 64,
+    tranche12: 64,
+    tranche13: 64,
+    tranche14: 64,
+    tranche15: 64,
+    tranche16: 64,
+    tranche17: 64,
+    tranche18: 64,
+    tranche19: 64,
+    tranche20: 64,
+    tranche21: 64,
+    tranche22: 64,
+    tranche23: 64,
+    tranche24: 64,
+    tranche25: 64,
+    tranche26: 64,
+    tranche27: 64,
+    tranche28: 64,
+    tranche29: 64,
+    tranche30: 64,
+    tranche31: 64,
+    master: 64, // Valeur par défaut au centre (0-127)
   });
 
   useEffect(() => {
@@ -49,7 +49,6 @@ function App() {
         const output = WebMidi.outputs[0];
         if (output) {
           setMidiOutput(output);
-          // console.log(output);
         } else {
           console.log("Aucune sortie MIDI disponible.");
         }
@@ -59,7 +58,7 @@ function App() {
 
   // Fonction de conversion des valeurs
   const convertToEqValue = (value) => {
-    return (value / 60) * 30 - 15; // Convertir 0-127 en -16 à +16
+    return (value / 128) * 32 - 16; // Convertir 0-127 en -16 à +16
   };
 
   const handleRangeChange = (e) => {
@@ -88,21 +87,21 @@ function App() {
   const resetSlider = (sliderName, tranche) => {
     setEqValues((prevValues) => ({
       ...prevValues,
-      [sliderName]: 30, // Valeur par défaut (centre)
+      [sliderName]: 64, // Valeur par défaut (centre)
     }));
     if (midiOutput) {
       const channel = 14; // Canal MIDI 1
       const controlChangeNumberL = tranche;
       const controlChangeNumberR = tranche + 32;
-      midiOutput.channels[channel].sendControlChange(controlChangeNumberL, 30);
-      midiOutput.channels[channel].sendControlChange(controlChangeNumberR, 30);
+      midiOutput.channels[channel].sendControlChange(controlChangeNumberL, 64);
+      midiOutput.channels[channel].sendControlChange(controlChangeNumberR, 64);
       console.log(controlChangeNumberL, controlChangeNumberR);
     }
   };
 
   return (
     <div className="App">
-      <h1>Contrôleur MIDI pour Ultracurve Pro deq-2496</h1>
+      <h1>Contrôleur MIDI pour Ultracurve Pro 8024</h1>
       <AudioAnalyzer />
       <div className="slider-container">
         <div className="tranche">
@@ -121,8 +120,8 @@ function App() {
               name="tranche1"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="1"
               value={eqValues.tranche1}
               onChange={handleRangeChange}
@@ -149,8 +148,8 @@ function App() {
               name="tranche2"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="2"
               value={eqValues.tranche2}
               onChange={handleRangeChange}
@@ -177,8 +176,8 @@ function App() {
               name="tranche3"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="3"
               value={eqValues.tranche3}
               onChange={handleRangeChange}
@@ -205,8 +204,8 @@ function App() {
               name="tranche4"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="4"
               value={eqValues.tranche4}
               onChange={handleRangeChange}
@@ -233,8 +232,8 @@ function App() {
               name="tranche5"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="5"
               value={eqValues.tranche5}
               onChange={handleRangeChange}
@@ -261,8 +260,8 @@ function App() {
               name="tranche6"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="6"
               value={eqValues.tranche6}
               onChange={handleRangeChange}
@@ -289,8 +288,8 @@ function App() {
               name="tranche7"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="7"
               value={eqValues.tranche7}
               onChange={handleRangeChange}
@@ -317,8 +316,8 @@ function App() {
               name="tranche8"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="8"
               value={eqValues.tranche8}
               onChange={handleRangeChange}
@@ -345,8 +344,8 @@ function App() {
               name="tranche9"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="9"
               value={eqValues.tranche9}
               onChange={handleRangeChange}
@@ -373,8 +372,8 @@ function App() {
               name="tranche10"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="10"
               value={eqValues.tranche10}
               onChange={handleRangeChange}
@@ -401,8 +400,8 @@ function App() {
               name="tranche11"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="11"
               value={eqValues.tranche11}
               onChange={handleRangeChange}
@@ -429,8 +428,8 @@ function App() {
               name="tranche12"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="12"
               value={eqValues.tranche12}
               onChange={handleRangeChange}
@@ -457,8 +456,8 @@ function App() {
               name="tranche13"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="13"
               value={eqValues.tranche13}
               onChange={handleRangeChange}
@@ -485,8 +484,8 @@ function App() {
               name="tranche14"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="14"
               value={eqValues.tranche14}
               onChange={handleRangeChange}
@@ -513,8 +512,8 @@ function App() {
               name="tranche15"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="15"
               value={eqValues.tranche15}
               onChange={handleRangeChange}
@@ -541,8 +540,8 @@ function App() {
               name="tranche16"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="16"
               value={eqValues.tranche16}
               onChange={handleRangeChange}
@@ -569,8 +568,8 @@ function App() {
               name="tranche17"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="17"
               value={eqValues.tranche17}
               onChange={handleRangeChange}
@@ -597,8 +596,8 @@ function App() {
               name="tranche18"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="18"
               value={eqValues.tranche18}
               onChange={handleRangeChange}
@@ -625,8 +624,8 @@ function App() {
               name="tranche19"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="19"
               value={eqValues.tranche19}
               onChange={handleRangeChange}
@@ -653,8 +652,8 @@ function App() {
               name="tranche20"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="20"
               value={eqValues.tranche20}
               onChange={handleRangeChange}
@@ -681,8 +680,8 @@ function App() {
               name="tranche21"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="21"
               value={eqValues.tranche21}
               onChange={handleRangeChange}
@@ -709,8 +708,8 @@ function App() {
               name="tranche22"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="22"
               value={eqValues.tranche22}
               onChange={handleRangeChange}
@@ -737,8 +736,8 @@ function App() {
               name="tranche23"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="23"
               value={eqValues.tranche23}
               onChange={handleRangeChange}
@@ -765,8 +764,8 @@ function App() {
               name="tranche24"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="24"
               value={eqValues.tranche24}
               onChange={handleRangeChange}
@@ -793,8 +792,8 @@ function App() {
               name="tranche25"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="25"
               value={eqValues.tranche25}
               onChange={handleRangeChange}
@@ -821,8 +820,8 @@ function App() {
               name="tranche26"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="26"
               value={eqValues.tranche26}
               onChange={handleRangeChange}
@@ -849,8 +848,8 @@ function App() {
               name="tranche27"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="27"
               value={eqValues.tranche27}
               onChange={handleRangeChange}
@@ -877,8 +876,8 @@ function App() {
               name="tranche28"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="28"
               value={eqValues.tranche28}
               onChange={handleRangeChange}
@@ -905,8 +904,8 @@ function App() {
               name="tranche29"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="29"
               value={eqValues.tranche29}
               onChange={handleRangeChange}
@@ -933,8 +932,8 @@ function App() {
               name="tranche30"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="30"
               value={eqValues.tranche30}
               onChange={handleRangeChange}
@@ -961,8 +960,8 @@ function App() {
               name="tranche31"
               className="form-range"
               min="0"
-              max="60"
-              step="1"
+              max="128"
+              step="2"
               id="31"
               value={eqValues.tranche31}
               onChange={handleRangeChange}
@@ -970,6 +969,34 @@ function App() {
             />
             <label htmlFor="31" className="form-label">
               20KHz
+            </label>
+          </div>
+        </div>
+        <div className="tranche">
+          <button
+            className="btn btn-outline-danger"
+            onClick={() => resetSlider("master", 32)}
+          >
+            /
+          </button>
+          <div className="slider">
+            <span className="value">
+              {convertToEqValue(eqValues.master).toFixed(1)} dB
+            </span>
+            <input
+              type="range"
+              name="master"
+              className="form-range"
+              min="0"
+              max="128"
+              step="2"
+              id="32"
+              value={eqValues.master}
+              onChange={handleRangeChange}
+              orient="vertical"
+            />
+            <label htmlFor="32" className="form-label">
+              MASTER
             </label>
           </div>
         </div>

@@ -1,9 +1,10 @@
 .App {
+  margin-top: 10px;
   text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
+  background-color: #ffffff;
   color: #333;
-  /* padding: 20px; */
+  padding: 10px;
 }
 
 h1 {
@@ -17,8 +18,8 @@ h1 {
 }
 
 .slider {
-  width: 31px;
-  height: 275px;
+  width: 32px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,9 +32,9 @@ h1 {
 .slider input[type="range"]
 /* .form-range */ {
   transform: rotate(90deg);
-  margin-top: 105px;
-  margin-bottom: 100px;
-  width: 700%;
+  margin-top: 145px;
+  margin-bottom: 110px;
+  width: 950%;
   /* height: 200px; */
   /* margin: 10px 0; */
   direction: rtl;
@@ -41,7 +42,7 @@ h1 {
 }
 
 .slider label {
-  margin-top: 5px;
+  margin-top: 35px;
   font-size: 0.4em;
   color: #666;
 }
